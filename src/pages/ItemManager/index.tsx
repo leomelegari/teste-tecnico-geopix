@@ -9,6 +9,7 @@ import {
   ContainerInput,
   ContainerSelect,
 } from "./styles";
+import { toast } from "react-toastify";
 
 interface ItemProp {
   id: string;
@@ -40,7 +41,11 @@ export const ItemManager = () => {
   // do novo item e, posteriormente, adiciono.
   // Precisei fazer dessa forma para conseguir inserir o ID com UUID
   const handleAddItem = (data: ItemProp) => {
-    if (data.name.length > 0) {
+    const checkForDuplicatedData = items.find(
+      (item) => item.name === data.name,
+    );
+
+    if (!checkForDuplicatedData) {
       const newItem: ItemProp = {
         id: uuidv4(),
         name: data.name,
@@ -49,7 +54,10 @@ export const ItemManager = () => {
       // Aqui fiz a atualização do estado dessa maneira pois utilizo do valor anterior já existente
       // para acrescentar um novo valor. Então dessa forma não violo algumas closures do react =D
       setItems((state) => [...state, newItem]);
+      toast.success("Informação registrada!");
       reset();
+    } else {
+      toast.error("Informação já existe!");
     }
   };
 
@@ -57,10 +65,12 @@ export const ItemManager = () => {
   const handleRemoveItem = (data: string) => {
     const newItemList = items.filter((item) => item.id !== data);
     setItems(newItemList);
+    toast.info("Informação removida!");
   };
 
   const handleClearBox = () => {
     setItems([]);
+    toast.info("Todas as informações foram removidas!");
   };
 
   return (

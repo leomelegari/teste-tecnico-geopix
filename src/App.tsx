@@ -1,14 +1,15 @@
 import { Default } from "./layouts/Default";
-import { Clock } from "./pages/Clock";
-import { ItemManager } from "./pages/ItemManager";
-import { ShyBall } from "./pages/ShyBall";
 import { GlobalStyle } from "./styles/global";
+import { ToastContainer } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
     <>
       <GlobalStyle />
       <Default />
+      <ToastContainer />
     </>
   );
 }
