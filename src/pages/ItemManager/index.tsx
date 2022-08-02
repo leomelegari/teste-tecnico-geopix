@@ -1,8 +1,9 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Container } from "./styles";
 
 interface ItemProp {
   id: string;
@@ -18,7 +19,7 @@ const schema = yup.object().shape({
 
 export const ItemManager = () => {
   const [items, setItems] = useState<ItemProp[]>([]);
-  const [selected, setSelected] = useState("");
+  const [selected, setSelected] = useState<string>("");
 
   const {
     handleSubmit,
@@ -49,7 +50,7 @@ export const ItemManager = () => {
   };
 
   return (
-    <div>
+    <Container>
       <form onSubmit={handleSubmit(handleAddItem)}>
         <div>
           <select
@@ -83,7 +84,8 @@ export const ItemManager = () => {
             Limpar caixa
           </button>
         </div>
+        <span>{}</span>
       </form>
-    </div>
+    </Container>
   );
 };
