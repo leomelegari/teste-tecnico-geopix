@@ -3,7 +3,12 @@ import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Container } from "./styles";
+import {
+  Container,
+  ContainerButton,
+  ContainerInput,
+  ContainerSelect,
+} from "./styles";
 
 interface ItemProp {
   id: string;
@@ -52,7 +57,7 @@ export const ItemManager = () => {
   return (
     <Container>
       <form onSubmit={handleSubmit(handleAddItem)}>
-        <div>
+        <ContainerSelect>
           <select
             placeholder="Selecione uma opção"
             onChange={(e) => setSelected(e.target.value)}
@@ -66,24 +71,30 @@ export const ItemManager = () => {
               );
             })}
           </select>
-        </div>
-        <div>
+        </ContainerSelect>
+        <ContainerInput>
           <input
             type="text"
             placeholder="Insira um item"
             {...register("name")}
           />
           <span>{errors.name?.message}</span>
-        </div>
-        <div>
-          <button type="submit">Adicionar</button>
-          <button type="button" onClick={() => handleRemoveItem(selected)}>
+        </ContainerInput>
+        <ContainerButton>
+          <button type="submit" className="add">
+            Adicionar
+          </button>
+          <button
+            type="button"
+            className="remove"
+            onClick={() => handleRemoveItem(selected)}
+          >
             Remover
           </button>
-          <button type="button" onClick={handleClearBox}>
+          <button type="button" className="clear" onClick={handleClearBox}>
             Limpar caixa
           </button>
-        </div>
+        </ContainerButton>
         <span>{}</span>
       </form>
     </Container>

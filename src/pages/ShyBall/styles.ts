@@ -6,11 +6,15 @@ interface Props {
 }
 
 export const BallContainer = styled.div`
-  width: 500px;
-  height: 500px;
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #171717;
 `;
 
 export const Ball = styled.div<Props>`
+  position: relative;
   width: 25px;
   height: 25px;
   border-radius: 999999px;

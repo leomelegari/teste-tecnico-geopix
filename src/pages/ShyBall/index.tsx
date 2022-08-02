@@ -7,7 +7,7 @@ export const ShyBall = () => {
 
   const handleMouseEvent = () => {
     setRandomLeft(Math.random() * 500);
-    setRandomTop(Math.random() * 500);
+    setRandomTop(Math.random() * 800);
   };
 
   return (

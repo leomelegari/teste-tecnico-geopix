@@ -8,4 +8,9 @@ export const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
     }
 
+    select, button {
+        border: none;
+        cursor: pointer;
+    }
+
 `;
