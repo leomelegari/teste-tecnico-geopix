@@ -15,6 +15,8 @@ interface ItemProp {
   name: string;
 }
 
+// Pequeno e simples esquema de validação de campos com yup, não tem muito o que dizer
+// pois ele é bem autoexplicativo
 const schema = yup.object().shape({
   name: yup
     .string()
@@ -23,6 +25,7 @@ const schema = yup.object().shape({
 });
 
 export const ItemManager = () => {
+  // Os estados onde as informações que utilizo são armazenadas
   const [items, setItems] = useState<ItemProp[]>([]);
   const [selected, setSelected] = useState<string>("");
 
@@ -33,6 +36,9 @@ export const ItemManager = () => {
     formState: { errors },
   } = useForm<ItemProp>({ resolver: yupResolver(schema) });
 
+  // Função de adicionar item, onde dentro dela crio um objeto com as informações
+  // do novo item e, posteriormente, adiciono.
+  // Precisei fazer dessa forma para conseguir inserir o ID com UUID
   const handleAddItem = (data: ItemProp) => {
     if (data.name.length > 0) {
       const newItem: ItemProp = {
@@ -40,11 +46,14 @@ export const ItemManager = () => {
         name: data.name,
       };
 
+      // Aqui fiz a atualização do estado dessa maneira pois utilizo do valor anterior já existente
+      // para acrescentar um novo valor. Então dessa forma não violo algumas closures do react =D
       setItems((state) => [...state, newItem]);
       reset();
     }
   };
 
+  // Função que remove o item da lista partindo da comparação do ID, gerado pelo UUID
   const handleRemoveItem = (data: string) => {
     const newItemList = items.filter((item) => item.id !== data);
     setItems(newItemList);
