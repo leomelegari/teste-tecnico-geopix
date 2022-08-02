@@ -25,6 +25,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias/bibliotecas:
 <td> Typescript</td>
 <td> React.JS</td>
 <td> Styled Components</td>
+<td> react-toastify</td>
  </tr>
  <tr>
 <td> react-hook-form</td>
@@ -47,6 +48,7 @@ e um botão de limpar todos os dados inseridos até o momento.
 
 Nele utilizei de alguns recursos que não eram obrigatórios como: 
 - [x] yup, para validar o campo input; 
+- [x] toastify, para interagir com as ações do usuário;
 - [x] react-hook-form, para submeter os valores obtidos no input; 
 - [x] useState, para gerenciamento das informações;
 - [x] UUID, para gerar identificação única para cada valor criado;
