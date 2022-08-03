@@ -5,16 +5,26 @@ export const Container = styled.div`
   height: 50%;
 
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 0.313rem;
 
   background-color: #35cd;
 
   form {
     display: flex;
-    gap: 15px;
+    gap: 1rem;
     flex-direction: column;
     align-items: center;
+  }
+
+  > span {
+    font-family: "Roboto", sans-serif;
+
+    :nth-child(2) {
+      font-weight: bold;
+    }
   }
 `;
 
@@ -53,8 +63,12 @@ export const ContainerInput = styled.div`
   }
 
   span {
+    margin-top: 0.2rem;
     font-family: "Roboto", sans-serif;
-    color: red;
+    color: yellow;
+    font-weight: bold;
+    font-size: 0.8rem;
+    text-align: center;
   }
 `;
 

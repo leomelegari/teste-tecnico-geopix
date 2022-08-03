@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
 import * as yup from "yup";
@@ -63,14 +63,24 @@ export const ItemManager = () => {
 
   // Função que remove o item da lista partindo da comparação do ID, gerado pelo UUID
   const handleRemoveItem = (data: string) => {
-    const newItemList = items.filter((item) => item.id !== data);
-    setItems(newItemList);
-    toast.info("Informação removida!");
+    const newItemList = items.filter((item) => item.name !== data);
+
+    if (newItemList.length !== items.length) {
+      setItems(newItemList);
+      setSelected("");
+      toast.info("Informação removida!");
+    } else {
+      toast.error("Nenhuma informação selecionada!");
+    }
   };
 
   const handleClearBox = () => {
-    setItems([]);
-    toast.info("Todas as informações foram removidas!");
+    if (items.length !== 0) {
+      setItems([]);
+      toast.info("Todas as informações foram removidas!");
+    } else {
+      toast.error("Nenhuma informação cadastrada!");
+    }
   };
 
   return (
@@ -79,12 +89,14 @@ export const ItemManager = () => {
         <ContainerSelect>
           <select
             placeholder="Selecione uma opção"
-            onChange={(e) => setSelected(e.target.value)}
+            onChange={(e) => {
+              setSelected(e.target.value);
+            }}
           >
             <option value="default">Selecione uma opção</option>
             {items.map((item) => {
               return (
-                <option key={item.id} value={item.id}>
+                <option key={item.id} value={item.name}>
                   {item.name}
                 </option>
               );
@@ -114,8 +126,13 @@ export const ItemManager = () => {
             Limpar caixa
           </button>
         </ContainerButton>
-        <span>{}</span>
       </form>
+      {selected ? (
+        <>
+          <span>Informação selecionada:</span>
+          <span>{selected}</span>
+        </>
+      ) : null}
     </Container>
   );
 };
